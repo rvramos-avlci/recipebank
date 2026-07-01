@@ -70,7 +70,7 @@ export default function RecipesIndex({ recipes, filters }) {
             <SearchBar>
                 <Input
                     className="max-w-[240px]"
-                    placeholder="Search recipe code…"
+                    placeholder="Search recipes..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && applyFilter()}

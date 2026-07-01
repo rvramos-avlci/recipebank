@@ -4,6 +4,8 @@ import { ToastProvider } from '@/hooks/useToast'
 import { useTheme } from '@/hooks/useTheme'
 import { usePermission } from '@/hooks/usePermission'
 
+const SIDEBAR_COLLAPSED_KEY = 'app.sidebar.collapsed'
+
 const NavItem = ({ href, icon, label, collapsed }) => {
     const { url } = usePage()
     const active = url.startsWith(href) && href !== '/recipes'
@@ -25,11 +27,18 @@ const NavItem = ({ href, icon, label, collapsed }) => {
 }
 
 export default function AppLayout({ children, title }) {
-    const [collapsed, setCollapsed]   = useState(false)
+    const [collapsed, setCollapsed]   = useState(() => {
+        if (typeof window === 'undefined') return false
+        return window.localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === 'true'
+    })
     const [userMenu,  setUserMenu]    = useState(false)
     const { isDark, toggle }          = useTheme()
     const { can, user }               = usePermission()
     const menuRef                     = useRef(null)
+
+    useEffect(() => {
+        window.localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(collapsed))
+    }, [collapsed])
 
     useEffect(() => {
         const handler = (e) => {
@@ -53,7 +62,7 @@ export default function AppLayout({ children, title }) {
                             <span className="text-brand-500 text-xl flex-shrink-0">◈</span>
                             {!collapsed && <span className="font-serif text-lg whitespace-nowrap">Recipe Bank</span>}
                         </div>
-                        <button onClick={() => setCollapsed(!collapsed)}
+                        <button onClick={() => setCollapsed(prev => !prev)}
                             className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded border border-[var(--border)] text-gray-400 hover:bg-[var(--bg-hover)] hover:text-gray-700 dark:hover:text-gray-200 text-sm transition-colors">
                             {collapsed ? '›' : '‹'}
                         </button>
