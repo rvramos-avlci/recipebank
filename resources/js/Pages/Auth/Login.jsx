@@ -85,24 +85,6 @@ export default function Login() {
                         </Button>
                     </form>
 
-                    {/* Demo accounts */}
-                    <div className="mt-8 pt-6 border-t border-[var(--border)]">
-                        <p className="text-[11px] uppercase tracking-widest text-[var(--text-muted)] mb-3">Demo Accounts</p>
-                        <div className="space-y-1.5">
-                            {DEMO_ACCOUNTS.map(account => (
-                                <button
-                                    key={account.email}
-                                    onClick={() => prefill(account)}
-                                    className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[var(--bg-hover)] transition-colors text-left"
-                                >
-                                    <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full min-w-[90px] text-center ${account.color}`}>
-                                        {account.role}
-                                    </span>
-                                    <span className="text-xs text-[var(--text-muted)] font-mono">{account.email}</span>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
                 </div>
             </div>
         </>

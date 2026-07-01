@@ -42,7 +42,7 @@ class RolesPermissionsSeeder extends Seeder
             ['email' => 'admin@softdev.com'],
             [
                 'name'      => 'System Admin',
-                'password'  => Hash::make('password'),
+                'password'  => Hash::make('P@ssw0rdqwerty'),
                 'role_id'   => $admin->id,
                 'is_active' => true,
             ]
@@ -50,7 +50,7 @@ class RolesPermissionsSeeder extends Seeder
 
         // Demo users for each role
         $demoUsers = [
-            ['name' => 'John Wick',   'email' => 'viewer@softdev.com', 'role' => $viewer->id],
+            ['name' => 'Damion Schaap',   'email' => 'damion.schaap@astoria.com.ph', 'role' => $viewer->id],
         ];
 
         foreach ($demoUsers as $u) {
@@ -58,7 +58,7 @@ class RolesPermissionsSeeder extends Seeder
                 ['email' => $u['email']],
                 [
                     'name'      => $u['name'],
-                    'password'  => Hash::make('password'),
+                    'password'  => Hash::make('P@ssw0rdqwerty'),
                     'role_id'   => $u['role'],
                     'is_active' => true,
                 ]
@@ -69,8 +69,8 @@ class RolesPermissionsSeeder extends Seeder
         $this->command->table(
             ['Email', 'Role', 'Password'],
             [
-                ['admin@softdev.com',      'Administrator',   'password'],
-                ['viewer@softdev.com',     'Viewer',          'password'],
+                ['admin@softdev.com',      'Administrator',   'P@ssw0rdqwerty'],
+                ['damion.schaap@astoria.com.ph',     'Viewer',          'P@ssw0rdqwerty'],
             ]
         );
     }
